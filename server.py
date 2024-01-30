@@ -69,11 +69,9 @@ def upload_file():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-import subprocess
+from flask import send_file
 
-# Add the uploaded files to the staging area
-subprocess.run(['git', 'add', 'uploads/'])
-# Commit the changes with a message
-subprocess.run(['git', 'commit', '-m', 'Added uploaded files'])
-# Push the committed changes to the default remote (origin)
-subprocess.run(['git', 'push', 'origin', 'main'])
+@app.route('/download/<filename>')
+def download_file(filename):
+    # Assuming the images are stored in the UPLOAD_FOLDER directory
+    return send_file(os.path.join(app.config['UPLOAD_FOLDER'], filename), as_attachment=True)
