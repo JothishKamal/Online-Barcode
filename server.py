@@ -6,7 +6,7 @@ import io
 
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 MB
 
-app = Flask(__name__, static_folder='/public', static_url_path='')
+app = Flask(__name__, static_folder='public', static_url_path='')
 app.config['DEBUG'] = False
 
 def compress_and_save_image(image, file_path):
