@@ -7,6 +7,7 @@ import io
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 MB
 
 app = Flask(__name__, static_folder='public', static_url_path='')
+app.config['DEBUG'] = False
 
 def compress_and_save_image(image, file_path):
     quality = 100
@@ -68,5 +69,3 @@ def upload_file():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=False)
