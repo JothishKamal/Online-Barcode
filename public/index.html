@@ -68,7 +68,11 @@
       .then(data => {
         if(data.success) {
           $('.container').prepend('<div class="alert alert-success" role="alert">' + data.message + '</div>');
-          $('#downloadBtn').attr('href', '/download/' + data.filename).attr('download', data.filename).show();
+          var downloadLink = document.createElement('a');
+          downloadLink.href = '/download/' + data.filename;
+          downloadLink.download = data.filename;
+          downloadLink.innerHTML = 'Download Image';
+          $('#downloadBtn').empty().append(downloadLink).show();
         } else {
           $('.container').prepend('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
         }
