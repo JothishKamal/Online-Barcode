@@ -63,11 +63,11 @@
       .then(data => {
         if(data.success) {
           $('.container').prepend('<div class="alert alert-success" role="alert">' + data.message + '</div>');
-          var downloadLink = document.createElement('a');
-          downloadLink.href = '/download/' + data.filename;
-          downloadLink.download = data.filename;
-          downloadLink.innerHTML = 'Download Image';
-          $('#downloadBtn').empty().append(downloadLink).show();
+              // Add a download button when the image upload is successful
+          $('#downloadBtn').empty().append('<a id="downloadLink" class="btn btn-primary" href="#" style="display: none;">Download Image</a>');
+          // Update the download link when a file is uploaded successfully
+          $('#downloadBtn').empty().append('<a id="downloadLink" class="btn btn-primary" href="#" style="display: none;">Download Image</a>');
+          $('#downloadLink').attr('href', '/download/' + data.filename).attr('download', data.filename).show();
         } else {
           $('.container').prepend('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
         }
