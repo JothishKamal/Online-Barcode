@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 import os
+from zipfile import ZipFile
 from PIL import Image
 import io
 
@@ -71,3 +72,14 @@ def download_file(filename):
     # Serve the file for download from the UPLOAD_FOLDER directory
     return send_file(os.path.join(app.config['UPLOAD_FOLDER'], filename), as_attachment=True)
 
+@app.route('/download-all')
+def download_all():
+    files = [os.path.join(app.config['UPLOAD_FOLDER'], file) for file in os.listdir(app.config['UPLOAD_FOLDER'])]
+
+    # Create a zip file containing all the uploaded images
+    with ZipFile('images.zip', 'w') as zipf:
+        for file in files:
+            zipf.write(file, os.path.basename(file))
+
+    # Send the zip file to the client for download
+    return send_file('images.zip', as_attachment=True)
