@@ -43,7 +43,9 @@
         <div id="downloadBtn" style="display: none;">
           <!-- This is where the download button will be inserted -->
         </div>
+        <div>
         <button id="downloadAllBtn" class="btn btn-primary">Download All Images</button>
+        </div>
       </div>
     </div>
   </div>
@@ -93,7 +95,7 @@
         $('.container').prepend('<div class="alert alert-danger" role="alert">Error: ' + error.message + '</div>');
       });
     });
-    
+
     // JavaScript code to handle the download button click event
     $('#downloadAllBtn').on('click', function() {
       // Redirect to the /download-all endpoint to trigger the download
