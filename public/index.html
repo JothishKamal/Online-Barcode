@@ -62,22 +62,36 @@
       fetch('/upload', {
         method: 'post',
         body: formData
-      }).then(response => response.json())
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
-        if(data.success) {
+        if (data.success) {
           $('.container').prepend('<div class="alert alert-success" role="alert">' + data.message + '</div>');
-          $('#downloadBtn').empty().append('<a id="downloadLink" class="btn btn-primary" href="#" style="display: none;">Download Image</a>');
-          $('#downloadLink').attr('href', '/download/' + data.filename).attr('download', data.filename).show();
+          // Create the download button
+          var downloadLink = $('<a>', {
+            class: 'btn btn-primary',
+            href: '/download/' + data.filename,
+            download: data.filename,
+            text: 'Download Image'
+          });
+          // Append the download button to the container
+          $('#downloadBtn').empty().append(downloadLink);
         } else {
           $('.container').prepend('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
         }
         setTimeout(function() {
           $('.alert').alert('close');
         }, 5000);
-      }).catch(error => {
+      })
+      .catch(error => {
         $('.container').prepend('<div class="alert alert-danger" role="alert">Error: ' + error.message + '</div>');
       });
     });
-  </script>  
+  </script>    
 </body>
 </html>
