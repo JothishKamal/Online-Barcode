@@ -81,7 +81,7 @@
             text: 'Download Image'
           });
           // Append the download button to the container
-          $('#downloadBtn').empty().append(downloadLink).show();
+          $('#downloadBtn').append(downloadLink).show();
         } else {
           $('.container').prepend('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
         }
@@ -98,7 +98,7 @@
     $('#downloadAllBtn').on('click', function() {
       // Redirect to the /download-all endpoint to trigger the download
       window.location.href = '/download-all';
-    }).show();
+    });
     
   </script>    
 </body>
