@@ -80,7 +80,7 @@
             text: 'Download Image'
           });
           // Append the download button to the container
-          $('#downloadBtn').empty().append(downloadLink);
+          $('#downloadBtn').empty().append(downloadLink).show();
         } else {
           $('.container').prepend('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
         }
